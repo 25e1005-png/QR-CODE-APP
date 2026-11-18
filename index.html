@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QRコード画像やカメラから情報を読み取り、一覧で管理するアプリ">
+    <title>QR名刺アプリ</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/html5-qrcode" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+    <div class="header-inner">
+        <div class="brand-mark" aria-hidden="true">QR</div>
+        <div><h1>QR名刺アプリ</h1><p>QRコードを読み取り、情報を一覧で管理します。</p></div>
+    </div>
+</header>
+<main class="container">
+    <section class="panel upload-panel">
+        <div class="section-heading">
+            <div><p class="eyebrow">QR CODE READER</p><h2>QRコード読み込み</h2></div>
+            <span class="step-badge">STEP 1</span>
+        </div>
+        <label class="file-picker" for="imageInput">
+            <span class="picker-icon" aria-hidden="true">+</span>
+            <span class="picker-text"><strong>画像を選択</strong><small>PNG・JPG・JPEG などの画像に対応</small></span>
+            <span class="picker-arrow" aria-hidden="true">&gt;</span>
+        </label>
+        <input type="file" id="imageInput" accept="image/*" multiple>
+        <div class="camera-controls">
+            <button type="button" id="cameraStartButton" class="action-button primary-button">カメラを起動</button>
+            <button type="button" id="cameraStopButton" class="action-button secondary-button" disabled>カメラを停止</button>
+        </div>
+        <div id="camera-reader" class="camera-reader" aria-label="QRコードカメラ"></div>
+        <p id="status" class="status" role="status" aria-live="polite">QRコード画像を選択するか、カメラを起動してください。</p>
+        <p class="help-text">※ カメラを使う場合は、カメラの使用を許可してください。HTTPS または localhost が必要です。</p>
+    </section>
+    <section class="panel list-panel">
+        <div class="section-heading list-heading">
+            <div><p class="eyebrow">READING HISTORY</p><h2>読み込み一覧</h2></div>
+            <span id="itemCount" class="count-badge">0 件</span>
+        </div>
+        <div class="toolbar">
+            <label class="search-box" for="searchInput"><span aria-hidden="true">⌕</span><input type="search" id="searchInput" placeholder="名前・QR情報を検索..." autocomplete="off"></label>
+            <div class="sort-controls">
+                <button type="button" id="sortNameButton" class="action-button secondary-button">名前順</button>
+                <button type="button" id="sortTimeButton" class="action-button secondary-button">時間順</button>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th class="photo-column">Photo</th><th class="number-column">No.</th><th>Name（QR情報）</th><th class="time-column">Time</th><th class="delete-column">Delete</th></tr></thead>
+                <tbody id="imageList"><tr class="empty-row"><td colspan="5">まだ読み込みデータがありません。</td></tr></tbody>
+            </table>
+        </div>
+        <div class="data-controls">
+            <button type="button" id="csvButton" class="action-button primary-button">CSV出力</button>
+            <button type="button" id="deleteAllButton" class="action-button danger-button">すべて削除</button>
+        </div>
+    </section>
+</main>
+<footer><p>QR名刺アプリ</p></footer>
+</body>
+</html>
